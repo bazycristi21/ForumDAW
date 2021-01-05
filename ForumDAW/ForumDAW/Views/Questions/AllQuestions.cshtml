@@ -1,0 +1,34 @@
+﻿@model ForumDAW.Models.AllQuestionsAnswers
+@{
+    ViewBag.Title = "AllQuestions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<p class="border">
+    @foreach (var q in Model.Questions)
+    {
+        <div>
+            Id intrebare: @q.Id
+        </div>
+        <div>
+            Descriere: @q.Description
+        </div>
+        foreach (var a in Model.Answers)
+        {
+            if (a.QuestionId == q.Id)
+            {
+                <div>
+                    @a.Id
+                </div>
+                <div>
+                    @a.UserId
+                </div>
+                <div>
+                    @a.Description
+                </div>
+            }
+        }
+
+    }
+
+</p>
+
