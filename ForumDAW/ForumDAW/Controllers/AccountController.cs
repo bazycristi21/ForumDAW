@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ForumDAW.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ForumDAW.Controllers
 {
@@ -156,7 +157,11 @@ namespace ForumDAW.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    if (!roleManager.RoleExists("utilizator"))
+                        roleManager.Create(new IdentityRole("utilizator"));
+                    UserManager.AddToRole(user.Id, "utilizator");
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

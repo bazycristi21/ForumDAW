@@ -9,7 +9,7 @@ namespace ForumDAW.Controllers
 {
     public class QuestionsController : Controller
     {
-        private DbCtx db = new DbCtx();
+        private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Questions
         public ActionResult Index()
         {
@@ -22,7 +22,7 @@ namespace ForumDAW.Controllers
             return View(question);
         }
 
-
+        [Authorize(Roles = "Admin")]
         public ActionResult AllQuestions()
         {
             List<Question> questions = db.Questions.ToList();

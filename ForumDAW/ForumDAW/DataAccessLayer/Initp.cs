@@ -7,24 +7,10 @@ using ForumDAW.Models;
 
 namespace ForumDAW.DataAccessLayer
 {
-    public class Initp : DropCreateDatabaseAlways<DbCtx>
+    public class Initp : DropCreateDatabaseAlways<ApplicationDbContext>
     {
-        protected override void Seed(DbCtx context)
+        protected override void Seed(ApplicationDbContext context)
         {
-            User u1 = new User
-            {
-                EmailAddress = "bazy_cristi_21@yahoo.com",
-                FirstName = "Bazavan",
-                LastName = "Cristian",
-                Id = 1
-            };
-            User u2 = new User
-            {
-                EmailAddress = "a@yahoo.com",
-                FirstName = "Popescu",
-                LastName = "Ionescu",
-                Id = 2
-            };
             Question q1 = new Question
             {
                 Description = "Cum aleg o placa video?",
@@ -44,8 +30,6 @@ namespace ForumDAW.DataAccessLayer
                 UserId = 1,
                 Description = "E in regula, stai chill."
             };
-            context.Users.Add(u1);
-            context.Users.Add(u2);
             context.Questions.Add(q1);
             context.Questions.Add(q2);
             context.Answers.Add(a1);

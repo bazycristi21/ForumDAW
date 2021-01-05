@@ -24,7 +24,8 @@ namespace ForumDAW.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

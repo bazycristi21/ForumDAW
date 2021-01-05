@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using ForumDAW.Models;
 namespace ForumDAW.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            return View();
+            List<Question> questions = db.Questions.ToList();
+            List<Answer> answers = db.Answers.ToList();
+            AllQuestionsAnswers A = new AllQuestionsAnswers { Questions = questions, Answers = answers };
+            return View(A);
         }
 
         public ActionResult About()
