@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-
+using ForumDAW.DataAccessLayer;
 namespace ForumDAW.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
@@ -23,12 +23,14 @@ namespace ForumDAW.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer<ApplicationDbContext>(new Initp());
         }
-        public DbSet<Question> Questions { get; set; }
-        public DbSet<Answer> Answers { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        
     }
 }

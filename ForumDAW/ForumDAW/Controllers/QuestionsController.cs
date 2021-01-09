@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ForumDAW.Models;
-using ForumDAW.DataAccessLayer;
 namespace ForumDAW.Controllers
 {
     public class QuestionsController : Controller
@@ -22,13 +21,14 @@ namespace ForumDAW.Controllers
             return View(question);
         }
 
-        [Authorize(Roles = "Admin")]
+        
         public ActionResult AllQuestions()
         {
             List<Question> questions = db.Questions.ToList();
-            List<Answer> answers = db.Answers.ToList();
-            AllQuestionsAnswers A = new AllQuestionsAnswers { Questions = questions, Answers = answers };
-            return View(A);
+            //List<Answer> answers = db.Answers.ToList();
+            // AllQuestionsAnswers A = new AllQuestionsAnswers { Questions = questions, Answers = answers };
+            ViewBag.questions = questions;
+            return View();
         }
     }
 }

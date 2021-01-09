@@ -14,6 +14,6 @@ namespace ForumDAW.Controllers
         {
             ViewBag.UsersList = ctx.Users.OrderBy(u => u.UserName).ToList();
             return View();
-        }
+        } 
     }
 }

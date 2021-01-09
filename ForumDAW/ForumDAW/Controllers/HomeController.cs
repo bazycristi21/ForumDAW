@@ -11,10 +11,8 @@ namespace ForumDAW.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            List<Question> questions = db.Questions.ToList();
-            List<Answer> answers = db.Answers.ToList();
-            AllQuestionsAnswers A = new AllQuestionsAnswers { Questions = questions, Answers = answers };
-            return View(A);
+            
+            return View();
         }
 
         public ActionResult About()

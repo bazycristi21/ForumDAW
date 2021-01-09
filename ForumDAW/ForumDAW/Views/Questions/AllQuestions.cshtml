@@ -4,23 +4,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <p class="border">
-    @foreach (var q in Model.Questions)
+    @foreach (var q in ViewBag.questions)
     {
         <div>
             Descriere: @q.Description
         </div>
-        foreach (var a in Model.Answers)
-        {
-            if (a.QuestionId == q.Id)
-            {
-                <div>
-                    @a.UserId
-                </div>
-                <div>
-                    @a.Description
-                </div>
-            }
-        }
+      
 
     }
 
