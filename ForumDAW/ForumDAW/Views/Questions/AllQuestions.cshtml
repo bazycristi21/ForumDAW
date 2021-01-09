@@ -3,26 +3,43 @@
     ViewBag.Title = "AllQuestions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<p class="border">
+<br />
+<br />
+<br />
+@Html.ActionLink("Pune o intrebare.", "New")
+<br />
+<br />
+<br />
+<br />
+<p>
     @foreach (var q in ViewBag.questions)
     {
-    <div>
-        Descriere: @q.Description
-        @foreach (var a in ViewBag.answers)
-        {
-            if (a.QuestionId == q.Id)
+        <div>
+            Descriere: @q.Description
+            <br />
+            <br />
+            @foreach (var a in ViewBag.answers)
             {
-                <div>
-                    @a.Description
-                </div>
+                if (a.QuestionId == q.Id)
+                {
+                    <div>
+                        @a.Description
+                        <br />
+                    </div>
+                }
+                <br />
+                <br />
             }
+            @Html.ActionLink("Adauga un raspuns la aceasta intrebare.", "New", "Answers",new {QuestionId = q.Id },null)
 
-        }
-
-    </div>
-        
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
 
     }
 
 </p>
+
 

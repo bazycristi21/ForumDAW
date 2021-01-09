@@ -23,7 +23,7 @@ namespace ForumDAW.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-            Database.SetInitializer<ApplicationDbContext>(new Initp());
+          // Database.SetInitializer<ApplicationDbContext>(new Initp());
         }
         public static ApplicationDbContext Create()
         {
@@ -31,6 +31,5 @@ namespace ForumDAW.Models
         }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
-        
     }
 }

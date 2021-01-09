@@ -20,8 +20,31 @@ namespace ForumDAW.Controllers
 
             return View(question);
         }
-
-        
+        [HttpGet]
+        public ActionResult New()
+        {
+            Question question = new Question();
+            return View(question);
+        }
+        [HttpPost]
+        public ActionResult Create(Question questionRequest)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    questionRequest.PublishTime = DateTime.Now;
+                    db.Questions.Add(questionRequest);
+                    db.SaveChanges();
+                    return RedirectToAction("AllQuestions");
+                }
+                return View(questionRequest);
+            }
+            catch (Exception e)
+            {
+                return View(questionRequest);
+            }
+        }
         public ActionResult AllQuestions()
         {
             List<Question> questions = db.Questions.ToList();

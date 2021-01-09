@@ -1,0 +1,22 @@
+﻿@model ForumDAW.Models.Answer
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Adauga un raspuns</h2>
+@using (Html.BeginForm("Create", "Answers", new { QuestionId = Request["QuestionId"] }))
+{
+    @Html.Label("Title", "Raspuns :")
+    <br />
+    <br /> 
+    <br /> 
+    @Html.TextBoxFor(b => b.Description, null, new { placeholder = "Descriere" })
+    <br /> 
+    <br /> 
+    <br /> 
+    @Html.ValidationMessageFor(b => b.Description, "", new { @class = "text-danger" })
+    <br /> 
+    <br /> 
+    <br /> 
+    <button class="btn btn-primary" type="submit">Create</button>
+}

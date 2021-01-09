@@ -7,7 +7,7 @@ using ForumDAW.Models;
 
 namespace ForumDAW.DataAccessLayer
 {
-    public class Initp : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    public class Initp : DropCreateDatabaseAlways<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext ctx)
         {
@@ -16,6 +16,11 @@ namespace ForumDAW.DataAccessLayer
             {
                 Description = "Cum aleg o placa video?",
                 Id = 1
+            });
+            ctx.Questions.Add(new Question
+            {
+                Description = "De ce se incalzeste procesorul?",
+                Id = 2
             });
             ctx.Answers.Add(new Answer
             {

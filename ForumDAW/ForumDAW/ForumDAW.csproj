@@ -247,10 +247,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Questions\AllQuestions.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Questions\New.cshtml" />
+    <Content Include="Views\Answers\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Answers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
