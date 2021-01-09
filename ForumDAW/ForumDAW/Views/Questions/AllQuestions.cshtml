@@ -6,10 +6,21 @@
 <p class="border">
     @foreach (var q in ViewBag.questions)
     {
-        <div>
-            Descriere: @q.Description
-        </div>
-      
+    <div>
+        Descriere: @q.Description
+        @foreach (var a in ViewBag.answers)
+        {
+            if (a.QuestionId == q.Id)
+            {
+                <div>
+                    @a.Description
+                </div>
+            }
+
+        }
+
+    </div>
+        
 
     }
 

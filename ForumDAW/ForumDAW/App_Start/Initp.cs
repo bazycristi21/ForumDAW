@@ -11,12 +11,24 @@ namespace ForumDAW.DataAccessLayer
     {
         protected override void Seed(ApplicationDbContext ctx)
         {
+            List<ApplicationUser> Users = ctx.Users.ToList();
             ctx.Questions.Add(new Question
             {
                 Description = "Cum aleg o placa video?",
-                
+                Id = 1
+            });
+            ctx.Answers.Add(new Answer
+            {
+                Description = "Nvidia ftw bro.",
+                QuestionId = 1,
+                Id = 1
             }) ;
-           
+            ctx.Answers.Add(new Answer
+            {
+                Description = "Seria 6000 amd varule.",
+                QuestionId = 1,
+                Id = 2
+            });
             ctx.SaveChanges();
             base.Seed(ctx);
         }

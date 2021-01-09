@@ -25,9 +25,10 @@ namespace ForumDAW.Controllers
         public ActionResult AllQuestions()
         {
             List<Question> questions = db.Questions.ToList();
-            //List<Answer> answers = db.Answers.ToList();
-            // AllQuestionsAnswers A = new AllQuestionsAnswers { Questions = questions, Answers = answers };
+            List<Answer> answers = db.Answers.ToList();
+            //AllQuestionsAnswers A = new AllQuestionsAnswers { Questions = questions, Answers = answers };
             ViewBag.questions = questions;
+            ViewBag.answers = answers;
             return View();
         }
     }
