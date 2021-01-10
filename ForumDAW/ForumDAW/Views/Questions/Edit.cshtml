@@ -1,0 +1,21 @@
+﻿@model ForumDAW.Models.Question
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+@using (Html.BeginForm(actionName: "ChangeContent", controllerName: "Questions"))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    @Html.HiddenFor(a => a.Id)
+    <br />
+    @Html.Label("Title", "Descrierea intrebarii:")
+    <br />
+    <br />
+    @Html.EditorFor(a => a.Description, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(a => a.Description, "", new { @class = "text-danger" })
+    <br />
+    <br />
+    <button class="btn btn-primary" type="submit">Update</button>
+}
+
