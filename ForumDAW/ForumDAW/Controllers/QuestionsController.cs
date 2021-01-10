@@ -22,17 +22,21 @@ namespace ForumDAW.Controllers
 
             return View(question);
         }
+        [Authorize]
         [HttpGet]
         public ActionResult New()
         {
             Question question = new Question();
             return View(question);
         }
+        [Authorize]
         [HttpPost]
+        [Route("Questions/Create")]
         public ActionResult Create(Question questionRequest)
         {
             try
             {
+                Console.WriteLine(ModelState.IsValid);
                 if (ModelState.IsValid)
                 {
                     questionRequest.PublishTime = DateTime.Now;
@@ -67,6 +71,7 @@ namespace ForumDAW.Controllers
             ViewBag.answers = answers;
             return View();
         }
+        [Authorize]
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -81,6 +86,7 @@ namespace ForumDAW.Controllers
             }
             return HttpNotFound("Id is null");
         }
+        [Authorize]
         [HttpPut]
         public ActionResult ChangeContent(Question questionRequest)
         {
@@ -106,6 +112,7 @@ namespace ForumDAW.Controllers
             }
 
         }
+        [Authorize]
         [HttpDelete]
         public ActionResult Delete(int id)
         {

@@ -18,12 +18,14 @@ namespace ForumDAW.Controllers
         {
             return View();
         }
+        [Authorize]
         [HttpGet]
         public ActionResult New()
         {
             Answer answer = new Answer();
             return View(answer);
         }
+        [Authorize]
         [HttpPost]
         public ActionResult Create(int QuestionId, Answer answerRequest)
         {
@@ -46,6 +48,7 @@ namespace ForumDAW.Controllers
             }
             return View();
         }
+        [Authorize]
         [HttpGet]
         public ActionResult Edit(int ? id)
         {
@@ -60,6 +63,7 @@ namespace ForumDAW.Controllers
             }
             return HttpNotFound("Id is null");
         }
+        [Authorize]
         [HttpPut]
         public ActionResult ChangeContent(Answer answerRequest)
         {
@@ -85,6 +89,7 @@ namespace ForumDAW.Controllers
             }
 
         }
+        [Authorize]
         [HttpDelete]
         public ActionResult Delete(int id)
         {
@@ -97,6 +102,5 @@ namespace ForumDAW.Controllers
             }
             return HttpNotFound("Couldn't find it, id: " + id.ToString());
         }
-       
     }
 }

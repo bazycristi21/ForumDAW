@@ -9,59 +9,64 @@
 <br />
 <br />
 <br />
-
 <p>
     @foreach (var q in ViewBag.questions)
     {
-    <div style="border: 1px solid black; padding : 20px;" >
+    <div style="border: 1px solid black; padding : 20px;">
         <h4><b>@q.User.UserName</b> a adresat intrebarea: @q.Description</h4>
         <h5><b>La data: @q.PublishTime</b></h5>
-        <div style="display:flex;">
-            @using (Html.BeginForm(actionName: "Edit", controllerName: "Questions", method: FormMethod.Get, routeValues: new { id = q.Id }))
-            {
-                <button class="btn btn-primary" type="submit">Edit</button>
-            }
-            @using (Html.BeginForm(actionName: "Delete", controllerName: "Questions", method: FormMethod.Post, routeValues: new { id = q.Id }))
-            {
-                @Html.HttpMethodOverride(HttpVerbs.Delete)
-                <button class="btn btn-primary" type="submit">Delete</button>
-            }
-            <br />
-            <br />
-        </div>
+        @if (q.UserId == User.Identity.GetUserId() || User.IsInRole("Admin"))
+        {
+            <div style="display:flex;">
+                @using (Html.BeginForm(actionName: "Edit", controllerName: "Questions", method: FormMethod.Get, routeValues: new { id = q.Id }))
+                {
+                    <button class="btn btn-primary" type="submit">Edit</button>
+                }
+                @using (Html.BeginForm(actionName: "Delete", controllerName: "Questions", method: FormMethod.Post, routeValues: new { id = q.Id }))
+                {
+                    @Html.HttpMethodOverride(HttpVerbs.Delete)
+                    <button class="btn btn-primary" type="submit">Delete</button>
+                }
+                <br />
+                <br />
+            </div>
+        }
         @foreach (var a in ViewBag.answers)
         {
             if (a.QuestionId == q.Id)
             {
-                <div style= "border:1px solid black; padding:10px;">
+                <br />
+                <div style="border:1px solid black; padding:10px;">
                     <b>@a.User.UserName</b> a raspuns: @a.Description
                     <h6><b>La data: @a.PublishTime</b></h6>
 
-                    @if (a.UserId == User.Identity.GetUserId())
+                    @if (a.UserId == User.Identity.GetUserId() || User.IsInRole("Admin"))
                     {
-                <div style="display:flex; float:right;">
-                    @using (Html.BeginForm(actionName: "Edit", controllerName: "Answers", method: FormMethod.Get, routeValues: new { id = a.Id }))
-                    {
-                    <button class="btn btn-primary" type="submit">Edit</button>
-                    }
-                    @using (Html.BeginForm(actionName: "Delete", controllerName: "Answers", method: FormMethod.Post, routeValues: new { id = a.Id }))
-                    {
-                    @Html.HttpMethodOverride(HttpVerbs.Delete)
-                    <button class="btn btn-primary" type="submit">Delete</button>
+
+                        <div style="display:flex;">
+                            @using (Html.BeginForm(actionName: "Edit", controllerName: "Answers", method: FormMethod.Get, routeValues: new { id = a.Id }))
+                            {
+                                <button class="btn btn-primary" type="submit">Edit</button>
+                            }
+                            @using (Html.BeginForm(actionName: "Delete", controllerName: "Answers", method: FormMethod.Post, routeValues: new { id = a.Id }))
+                            {
+                                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                <button class="btn btn-primary" type="submit">Delete</button>
+                            }
+                        </div>
+
                     }
                 </div>
-                       
-                    }
-                </div>
+
             }
         }
-        <br/>
+        <br />
         @Html.ActionLink("Adauga un raspuns.", "New", "Answers", new { QuestionId = q.Id }, new { @class = "btn btn-primary" })
     </div>
-        <br />
-        <br />
-        <br />
-        <br />
+    <br />
+    <br />
+    <br />
+    <br />
     }
 </p>
 

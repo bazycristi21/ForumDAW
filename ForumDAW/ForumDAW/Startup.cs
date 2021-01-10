@@ -12,6 +12,7 @@ namespace ForumDAW
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            CreateAdminAndUserRoles();
         }
         private void CreateAdminAndUserRoles()
         {
@@ -22,17 +23,17 @@ namespace ForumDAW
                 new UserStore<ApplicationUser>(ctx));
             if(!roleManager.RoleExists("Admin"))
             {
-                var role = new IdentityRole();
-                role.Name = "Admin";
-                roleManager.Create(role);
+                roleManager.Create(new IdentityRole("Admin"));
                 var user = new ApplicationUser();
                 user.UserName = "admin@admin.com";
                 user.Email = "admin@admin.com";
-                var adminCreated = userManager.Create(user, "Admin2020!");
+                var adminCreated = userManager.Create(user, "Admin");
                 if(adminCreated.Succeeded)
                 {
                     userManager.AddToRole(user.Id, "Admin");
+                    ctx.SaveChanges();
                 }
+                
 
             }
         }

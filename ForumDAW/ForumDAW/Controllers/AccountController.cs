@@ -10,7 +10,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ForumDAW.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
-
 namespace ForumDAW.Controllers
 {
     [Authorize]
@@ -152,6 +151,7 @@ namespace ForumDAW.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -161,14 +161,15 @@ namespace ForumDAW.Controllers
                     var roleManager = new RoleManager<IdentityRole>(roleStore);
                     if (!roleManager.RoleExists("utilizator"))
                         roleManager.Create(new IdentityRole("utilizator"));
-                    UserManager.AddToRole(user.Id, "utilizator");
+                    if(!User.IsInRole("Admin"))
+                        UserManager.AddToRole(user.Id, "utilizator");
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("AllQuestions", "Questions");
                 }
                 AddErrors(result);
             }
@@ -397,7 +398,7 @@ namespace ForumDAW.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("AllQuestions", "Questions");
         }
 
         //
@@ -454,7 +455,7 @@ namespace ForumDAW.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("AllQuestions", "Questions");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
