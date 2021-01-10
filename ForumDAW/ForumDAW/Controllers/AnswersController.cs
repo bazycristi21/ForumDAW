@@ -46,7 +46,6 @@ namespace ForumDAW.Controllers
             {
                return View(answerRequest);
             }
-            return View();
         }
         [Authorize]
         [HttpGet]

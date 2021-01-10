@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Cauta";
+}
+
+<h2>Lista review-urilor pentru aceasta piesa:</h2>
+<br />
+<br />
+<br />
+<br />
+<br />
+<p>
+    @foreach (var q in ViewBag.reviews)
+    {
+        <div style="border: 1px solid black; padding : 20px;">
+            <h4>Review-ul lui <b>@q.User.UserName </b> : @q.Description</h4>
+            <h5><b>La data: @q.PublishTime</b></h5>
+            @if (q.UserId == User.Identity.GetUserId() || User.IsInRole("Admin"))
+            {
+                <div style="display:flex;">
+                    @using (Html.BeginForm(actionName: "Edit", controllerName: "Reviews", method: FormMethod.Get, routeValues: new { id = q.Id }))
+                    {
+                        <button class="btn btn-primary" type="submit">Edit</button>
+                    }
+                    @using (Html.BeginForm(actionName: "Delete", controllerName: "Reviews", method: FormMethod.Post, routeValues: new { id = q.Id }))
+                    {
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button class="btn btn-primary" type="submit">Delete</button>
+                    }
+                    <br />
+                    <br />
+                </div>
+            }
+            @Html.ActionLink("Adauga un review.", "New", "Reviews", new { ComponentId = q.Id }, new { @class = "btn btn-primary" })
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+    }
+</p>

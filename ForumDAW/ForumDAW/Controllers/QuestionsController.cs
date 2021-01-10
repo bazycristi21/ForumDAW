@@ -36,7 +36,6 @@ namespace ForumDAW.Controllers
         {
             try
             {
-                Console.WriteLine(ModelState.IsValid);
                 if (ModelState.IsValid)
                 {
                     questionRequest.PublishTime = DateTime.Now;
@@ -66,7 +65,7 @@ namespace ForumDAW.Controllers
             {
                 a.User = users.FirstOrDefault(u => u.Id == a.UserId);
             }
-            //AllQuestionsAnswers A = new AllQuestionsAnswers { Questions = questions, Answers = answers };
+           
             ViewBag.questions = questions;
             ViewBag.answers = answers;
             return View();

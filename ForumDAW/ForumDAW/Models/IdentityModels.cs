@@ -33,6 +33,9 @@ namespace ForumDAW.Models
         }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Component> Components { get; set; }
+
     }
     public class IdentityDbInit : DropCreateDatabaseAlways<ApplicationDbContext>
     {
