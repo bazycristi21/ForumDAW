@@ -23,6 +23,7 @@ namespace ForumDAW.Controllers
         }
 
         // GET: Reviews/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -111,6 +112,7 @@ namespace ForumDAW.Controllers
 
         }
         // GET: Reviews/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)

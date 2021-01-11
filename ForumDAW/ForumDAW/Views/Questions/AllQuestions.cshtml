@@ -24,7 +24,7 @@
                 @using (Html.BeginForm(actionName: "Delete", controllerName: "Questions", method: FormMethod.Post, routeValues: new { id = q.Id }))
                 {
                     @Html.HttpMethodOverride(HttpVerbs.Delete)
-                    <button class="btn btn-primary" type="submit">Delete</button>
+                    <button class="btn btn-primary" type="submit" style="margin-left:10px">Delete</button>
                 }
                 <br />
                 <br />

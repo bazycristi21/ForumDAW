@@ -21,6 +21,7 @@ namespace ForumDAW.Controllers
         }
 
         // GET: Components/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -34,7 +35,7 @@ namespace ForumDAW.Controllers
             }
             return View(component);
         }
-
+        [Authorize(Roles ="Admin")]
         // GET: Components/Create
         public ActionResult Create()
         {
@@ -45,6 +46,7 @@ namespace ForumDAW.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Specifications")] Component component)
         {
@@ -74,6 +76,7 @@ namespace ForumDAW.Controllers
             ViewBag.reviews = Reviews;
             return View();
         }
+        [Authorize]
         // GET: Components/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -94,6 +97,7 @@ namespace ForumDAW.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,Name,Specifications")] Component component)
         {
             if (ModelState.IsValid)
@@ -106,6 +110,7 @@ namespace ForumDAW.Controllers
         }
 
         // GET: Components/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -119,7 +124,7 @@ namespace ForumDAW.Controllers
             }
             return View(component);
         }
-
+        [Authorize]
         // POST: Components/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -130,7 +135,6 @@ namespace ForumDAW.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

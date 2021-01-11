@@ -65,7 +65,6 @@ namespace ForumDAW.Controllers
             {
                 a.User = users.FirstOrDefault(u => u.Id == a.UserId);
             }
-           
             ViewBag.questions = questions;
             ViewBag.answers = answers;
             return View();
