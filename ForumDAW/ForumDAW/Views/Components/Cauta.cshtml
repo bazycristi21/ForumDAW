@@ -31,11 +31,15 @@
                     <br />
                 </div>
             }
-            @Html.ActionLink("Adauga un review.", "New", "Reviews", new { ComponentId = q.Id }, new { @class = "btn btn-primary" })
+
         </div>
         <br />
         <br />
         <br />
         <br />
+
     }
+    @Html.ActionLink("Adauga un review.", "New", "Reviews", new { ComponentId = ViewBag.component.Id }, new { @class = "btn btn-primary" })
+
+
 </p>

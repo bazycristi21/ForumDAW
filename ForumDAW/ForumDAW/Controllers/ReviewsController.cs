@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using ForumDAW.Models;
 
 namespace ForumDAW.Controllers
@@ -36,65 +37,79 @@ namespace ForumDAW.Controllers
             return View(review);
         }
 
-        // GET: Reviews/Create
-        public ActionResult Create()
+        [Authorize]
+        [HttpGet]
+        public ActionResult New()
         {
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
-            return View();
+            Review rev = new Review();
+            return View(rev);
         }
-
-        // POST: Reviews/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ComponentId,UserId,Description,PublishTime")] Review review)
+        public ActionResult Create(int ComponentId, Review reviewRequest)
         {
-            if (ModelState.IsValid)
+            try
             {
-                review.PublishTime = DateTime.Now;
-                db.Reviews.Add(review);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    reviewRequest.PublishTime = DateTime.Now;
+                    reviewRequest.ComponentId = ComponentId;
+                    reviewRequest.UserId = User.Identity.GetUserId();
+                    db.Reviews.Add(reviewRequest);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Reviews");
+                }
+                return View(reviewRequest);
             }
-
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", review.UserId);
-            return View(review);
+            catch (Exception e)
+            {
+                return View(reviewRequest);
+            }
         }
-
-        // GET: Reviews/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Review review = db.Reviews.Find(id);
-            if (review == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", review.UserId);
-            return View(review);
-        }
-
         // POST: Reviews/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ComponentId,UserId,Description,PublishTime")] Review review)
+        [Authorize]
+        [HttpGet]
+        public ActionResult Edit(int? id)
         {
-            if (ModelState.IsValid)
+            if (id.HasValue)
             {
-                db.Entry(review).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                Review rev = db.Reviews.Find(id);
+                if (rev == null)
+                {
+                    return HttpNotFound("Could't find it, id " + id.ToString());
+                }
+                return View(rev);
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", review.UserId);
-            return View(review);
+            return HttpNotFound("Id is null");
         }
+        [Authorize]
+        [HttpPut]
+        public ActionResult ChangeContent(Review reviewRequest)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Review rev = db.Reviews.FirstOrDefault(b => b.Id.Equals(reviewRequest.Id));
+                    if (TryUpdateModel(rev))
+                    {
+                        rev.Description = reviewRequest.Description;
 
+                        db.SaveChanges();
+                    }
+                    return RedirectToAction("AllQuestions", "Questions");
+
+                }
+                return View(reviewRequest);
+            }
+            catch (Exception e)
+            {
+                return View(reviewRequest);
+            }
+
+        }
         // GET: Reviews/Delete/5
         public ActionResult Delete(int? id)
         {
