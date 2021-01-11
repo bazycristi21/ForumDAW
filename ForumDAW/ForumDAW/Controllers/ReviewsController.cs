@@ -45,6 +45,8 @@ namespace ForumDAW.Controllers
             Review rev = new Review();
             return View(rev);
         }
+
+
         [Authorize]
         [HttpPost]
         public ActionResult Create(int ComponentId, Review reviewRequest)
@@ -53,12 +55,12 @@ namespace ForumDAW.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    reviewRequest.PublishTime = DateTime.Now;
-                    reviewRequest.ComponentId = ComponentId;
-                    reviewRequest.UserId = User.Identity.GetUserId();
-                    db.Reviews.Add(reviewRequest);
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "Reviews");
+                        reviewRequest.PublishTime = DateTime.Now;
+                        reviewRequest.ComponentId = ComponentId;
+                        reviewRequest.UserId = User.Identity.GetUserId();
+                        db.Reviews.Add(reviewRequest);
+                        db.SaveChanges();
+                        return RedirectToAction("Index", "Reviews"); 
                 }
                 return View(reviewRequest);
             }

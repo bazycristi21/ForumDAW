@@ -31,7 +31,7 @@ namespace ForumDAW.Controllers
         }
         [Authorize]
         [HttpPost]
-        [Route("Questions/Create")]
+        
         public ActionResult Create(Question questionRequest)
         {
             try
@@ -44,7 +44,7 @@ namespace ForumDAW.Controllers
                     db.SaveChanges();
                     return RedirectToAction("AllQuestions");
                 }
-                return View(questionRequest);
+                return View("New",questionRequest);
             }
             catch (Exception e)
             {

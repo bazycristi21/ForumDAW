@@ -313,7 +313,10 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Question.cs" />
+    <Compile Include="Models\Rating.cs" />
+    <Compile Include="Models\RatingsController.cs" />
     <Compile Include="Models\Review.cs" />
+    <Compile Include="Models\ValidB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -391,6 +394,11 @@
     <Content Include="Views\Reviews\Index.cshtml" />
     <Content Include="Views\Components\Cauta.cshtml" />
     <Content Include="Views\Reviews\New.cshtml" />
+    <Content Include="Views\Ratings\Create.cshtml" />
+    <Content Include="Views\Ratings\Delete.cshtml" />
+    <Content Include="Views\Ratings\Details.cshtml" />
+    <Content Include="Views\Ratings\Edit.cshtml" />
+    <Content Include="Views\Ratings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

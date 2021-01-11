@@ -4,7 +4,9 @@
     ViewBag.Title = "Index";
     ForumDAW.Models.ApplicationDbContext db = new ForumDAW.Models.ApplicationDbContext();
 }
-
+<br/>
+<br/>
+<br/>
 <h2>Lista review-uri</h2>
 
 <table class="table">
@@ -13,15 +15,14 @@
             @Html.DisplayNameFor(model => model.User.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ComponentId)
+            Componenta
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Descriere
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PublishTime)
+           Data publicarii
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model)

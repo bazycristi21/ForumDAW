@@ -2,21 +2,22 @@
 @{
     ViewBag.Title = "New";
 }
-
+<br />
+<br />
+<br />
 <h2>Adauga un raspuns</h2>
 @using (Html.BeginForm("Create", "Answers", new { QuestionId = Request["QuestionId"] }))
 {
+    <br />
+    <br />
+    <br />
     @Html.Label("Title", "Raspuns :")
     <br />
-    <br /> 
-    <br /> 
-    @Html.TextBoxFor(b => b.Description, null, new { placeholder = "Descriere" })
-    <br /> 
-    <br /> 
-    <br /> 
+    <br />
+    @Html.TextBoxFor(b => b.Description, null, new { placeholder = "Descriere", @class = " form-control" })
     @Html.ValidationMessageFor(b => b.Description, "", new { @class = "text-danger" })
-    <br /> 
-    <br /> 
-    <br /> 
+    <br />
+    <br />
+    <br />
     <button class="btn btn-primary" type="submit">Create</button>
 }

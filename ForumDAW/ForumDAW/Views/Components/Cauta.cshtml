@@ -2,11 +2,11 @@
 @{
     ViewBag.Title = "Cauta";
 }
-
+<br />
+<br />
+<br />
 <h2>Lista review-urilor pentru aceasta piesa:</h2>
-<br />
-<br />
-<br />
+
 <br />
 <br />
 <p>
@@ -25,7 +25,7 @@
                     @using (Html.BeginForm(actionName: "Delete", controllerName: "Reviews", method: FormMethod.Post, routeValues: new { id = q.Id }))
                     {
                         @Html.HttpMethodOverride(HttpVerbs.Delete)
-                        <button class="btn btn-primary" type="submit">Delete</button>
+                        <button class="btn btn-primary" type="submit" style="margin-left:10px;">Delete</button>
                     }
                     <br />
                     <br />

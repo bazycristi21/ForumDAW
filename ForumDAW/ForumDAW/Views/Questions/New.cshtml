@@ -2,16 +2,25 @@
 @{
     ViewBag.Title = "New";
 }
-
+<br />
+<br />
 <h2>Adauga o intrebare</h2>
-
-@using (Html.BeginForm(actionName : "Create", controllerName: "Questions", method :FormMethod.Post))
+<br />
+<br />
+@using (Html.BeginForm(actionName: "Create", controllerName: "Questions", method: FormMethod.Post))
 {
-    @Html.Label("Title","Question description :")
+<div>
+    @Html.Label("Title", "Descrierea intrebarii:")
     <br />
-    @Html.TextBoxFor(b => b.Description, null, new { placeholder = "Question Description"})
-    @Html.ValidationMessageFor(b=>b.Description, "", new { @class = "text-danger" })
     <br />
-    <button class= "btn btn-primary" type="submit">Create</button>
-    
+    <div class="form-group">
+        @Html.TextBoxFor(b => b.Description, null, new { placeholder = "Descriere", @class = "form-control" })
+        <br/>
+        @Html.ValidationSummary(true, "Rezolvati urmatoarele probleme:")
+        @Html.ValidationMessageFor(b => b.Description, "Completati toate campurile", new { @class = "text-danger" })
+    </div>
+    <br />
+    <br />
+    <button class="btn btn-primary" type="submit">Adauga</button>
+</div>
 }

@@ -9,10 +9,9 @@ namespace ForumDAW.Models
     {
         public int Id { get; set; }
         [Required]
-        [MinLength(5)]
-        [MaxLength(200)]
+        [MinLength(5,ErrorMessage = "Lungimea minima a raspunsului este 5")]
+        [MaxLength(200, ErrorMessage = "Lungimea maxima a raspunsului este 300")]
         public string Description { get; set; }
-        [Required]
         public int QuestionId { get; set; }
         public string UserId { get; set; }
         public DateTime PublishTime { get; set; }

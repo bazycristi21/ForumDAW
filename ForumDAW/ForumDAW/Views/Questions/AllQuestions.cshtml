@@ -6,6 +6,9 @@
 <br />
 <br />
 <br />
+<p>
+    <h2>Aici poti vedea toate intrebarile deja adresate:</h2>
+</p>
 <br />
 <br />
 <p>
@@ -50,7 +53,7 @@
                             @using (Html.BeginForm(actionName: "Delete", controllerName: "Answers", method: FormMethod.Post, routeValues: new { id = a.Id }))
                             {
                                 @Html.HttpMethodOverride(HttpVerbs.Delete)
-                                <button class="btn btn-primary" type="submit">Delete</button>
+                                <button class="btn btn-primary" type="submit" style="margin-left:10px">Delete</button>
                             }
                         </div>
 
